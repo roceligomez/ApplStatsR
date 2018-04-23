@@ -1,0 +1,23 @@
+\documentclass[12pt,oneside,reqno]{amsart}
+\usepackage[a4paper, total={6in, 9in}]{geometry}
+\usepackage{amsmath} 
+\usepackage[utf8]{inputenc}
+\begin{document} 
+\begin{eqnarray*}
+    \textnormal{NVDI}&=&\frac{\textnormal{R}_{Infrared}-\textnormal{R}_{Red}}{\textnormal{R}_{Infrared}+{\textnormal{R}_{Red}}}\\
+    \vspace{2cm}\\
+    \langle{f,}\psi_\lambda,t \rangle \quad &=&\quad\int_{-\infty}^\infty f(\it u)\psi_{\lambda,t}(\it u)\, \textnormal{d}u,\quad \lambda>0\\
+    \vspace{1cm}\\
+    \space&=&\quad\int_{-\infty}^\infty f(\it u)\frac{1}{\sqrt{\lambda}}\psi\, \left(\frac{u-t}{\lambda}\right)\, \textnormal{d}u\\
+    \vspace{2cm}\\
+    f(t)&=&\frac{1}{C_{\psi}}\int_{-\infty}^\infty\int_{0}^\infty \lambda^{-2}W f(\lambda,u)\psi_{\lambda,u}(t)\textnormal{d}\lambda \textnormal{d}u\\
+    \vspace{2cm}\\
+    C_{\psi}&=&2\pi\int_{0}^\infty\frac{|\hat{\psi(\omega)}|^{2}}{\omega}\textnormal{d}\omega < \infty\\
+    \vspace{2cm}\\
+    \psi_{m,n}(t)&=&\frac{1}{\sqrt{\lambda_{0}^m}}\psi\left(\frac{t-nt_{0}\lambda_{0}^m}{\lambda_{0}^{m}}\right)\\
+    \vspace{1.5cm}\\
+    \space&=&\lambda_{0}^{-m/2}\psi(\lambda_{0}^{-m}t-nt_{0})\\
+    \vspace{2cm}\\
+    \langle f,\psi_{m,n}\rangle&=&\lambda_{0}^{-m/2}\int f(t)\psi\, (\lambda_{0}^{-m}t-nt_{0})\, \textnormal{d}t\\
+\end{eqnarray*}
+\end{document}

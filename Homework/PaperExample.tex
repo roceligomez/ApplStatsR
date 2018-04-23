@@ -1,0 +1,17 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\begin{document}
+$$\textnormal{NDVI}=\frac{R_Infrared-R_Red}{R_Infrared+R_Red}.$$
+\begin{eqnarray*}
+\langle f,\psi_\lambda,t\rangle=\int_{-\infty}^\infty 
+f(u)\psi_\lambda,t\textnormal{d}u,\qquad \lambda>0\\
+=\int_{-\infty}^\infty f(u) \frac{1}{\sqrt[]{\lambda}}\psi\Big(\frac{u-t}{\lambda}\Big) \quad\textnormal{d}u,\\
+\end{eqnarray*}
+$$f(t)\quad=\quad\frac{1}{C_\psi}\int_{-\infty}^\infty\int_0^\infty\lambda^{-2}Wf(\lambda,u)\psi_{\lambda,u}(t)\textnormal(d)\lambda\textnormal{d}u,$$
+$$C_\psi=2\pi\int_0^\infty\frac{|\hat{\psi}(\omega)|^2}{\omega}\textnormal{d}\omega<\infty,$$
+\begin{eqnarray*}
+\psi_{m,n}(t)\quad=\quad\frac{1}{\sqrt[]{\lambda_0^m}}\psi\Big(\frac{t-nt_0\lambda_0^m}{\lambda_0^m}\Big)\\
+=\quad\lambda_0^{-m/2}\psi (\lambda_0^{-m}t-nt_0),\\
+\end{eqnarray*}
+$$\langle f,\psi_{m,n}\rangle=\lambda_0^{-m/2}\int f(t)\psi (\lambda_0^{-m}t-nt_0)\textnormal{d}t.$$
+\end{document}
