@@ -48,10 +48,11 @@ estimator <- function(x, y, m, K) {
     return(C %*% solve(t(C) %*% C) %*% t(C) %*% y)
     
 }
-pricehat = estimator(x = seq_along(data[, 2]), y = data[, 2], m = 1, K = floor(n.obs/50))
-plot(log(data[, 2]), col = 8, type = "l")
-lines(log(pricehat), lwd = 4, col = "red")
 
+plot(log(data[, 2]), col = 8, type = "l")
+lines(
+  log(estimator(x = seq_along(data[, 2]), y = data[, 2], m = 1, K = floor(n.obs/50))),
+  lwd = 4, col = "red")
 
 hatmatrix = sapply(data[, -1], estimator, x = seq_along(data[, 2]), m = 2, K = floor(n.obs/50))
 
