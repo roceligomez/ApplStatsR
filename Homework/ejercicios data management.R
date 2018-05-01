@@ -37,7 +37,7 @@ write.table(Knee2,file="Knee2.dat",row.names = FALSE,col.names = FALSE)
 download.file("https://github.com/franciscorosales-marticorena/ApplStatsR/raw/master/Exercises/movies.csv",destfile ="movies.csv")
 movies=read.csv("movies.csv",header = TRUE)
 movies
-class(movies$release) # con esta función hemos hallado que release es una variable factor
+class(movies$release) # con esta funciÃ³n hemos hallado que release es una variable factor
 class(movies$end) # end tambien es factor
 movies$release
 estreno=as.Date(movies$release,"%d.%m.%Y")
@@ -82,7 +82,7 @@ read.sas7bdat("s05_01.sas7bdat")
 download.file("https://github.com/franciscorosales-marticorena/ApplStatsR/raw/master/Exercises/golf.dta",destfile = "golf.dta")
 read.dta("golf.dta")
 
-#this code was made Tarantino 97
+#this code was made by Tarantino 97
 
 
 
