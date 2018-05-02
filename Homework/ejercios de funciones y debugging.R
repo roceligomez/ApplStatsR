@@ -10,7 +10,7 @@ my_factorial=function(x){
 
 my_factorial(5)
 
-is.integer(7L) # la razon por la cual la función is.integer no nos sirve es porque nuestra definicion de entero es diferente a la R
+is.integer(7L) # la razon por la cual la funciÃ³n is.integer no nos sirve es porque nuestra definicion de entero es diferente a la R
 
 my_int= function(x){
  
@@ -23,7 +23,7 @@ my_int= function(x){
 my_factorial=function(x){
   
   if (my_int(x)==FALSE){
-    message("error, el número no es un entero")
+    message("error, el nÃºmero no es un entero")
   }
 else{ if(my_int(x)==T & x>0){
   prod = prod(1:x)
@@ -61,14 +61,14 @@ running_mean = function(k) {
 running_mean(2)
 #b
 
-rm(list = ls()) #esta es la razon por la cual no corre en la opción b , ya que se borra todos los elementos del workspace
+rm(list = ls()) #esta es la razon por la cual no corre en la opciÃ³n b , ya que se borra todos los elementos del workspace
 running_mean = function(k) {
   x = 1:5
   1 / k * sum(x[1:k])
 }
 
 running_mean(2) 
-# si colocamos x=1:5 dentro de la función esta correra independientemente del workspace
+# si colocamos x=1:5 dentro de la funciÃ³n esta correra independientemente del workspace
 
 #3
 
@@ -86,3 +86,5 @@ n.root(3)
 
 y=n.root(1:10)(500)
 y
+
+#this code was made by Tarantno97
