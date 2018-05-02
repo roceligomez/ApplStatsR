@@ -1,0 +1,29 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\begin{document}
+
+
+$$NDVI=\frac{R_infrared - R_Red}{R_Infrared+R_Red}.$$
+
+
+$$\langle{f},\psi_{\Lambda,t}\rangle=\int_{-\infty}^{\infty}f(u)\psi_{\Lambda,t}(u)du,\  \  \  \ \lambda>0$$   
+
+$$\langle{f},\psi_{\lambda.t}\rangle=\int_{-\infty}^{\infty}f(u)\psi_{\lambda,t}(u)du, \  \ \ \ \lambda>0$$
+
+$$=\int_{-\infty}^{\infty}f(u)\frac{1}{\sqrt[]{\Lambda}}\psi(\frac{u-t}{\lambda})du, $$
+
+$$f(t)=\frac{1}{C_\psi}\int_{-\infty}^{\infty}\int_{0}^{\infty}\lambda^{-2}Wf(\lambda,u)\psi_{\Lambda,u}(t)d{\Lambda}du, $$
+
+$$C_\psi=2\pi\int_{0}^{\infty}\frac{|\psi(w)|^{2}}{w}dw < \infty,$$
+
+$$\psi_{m,n}(t)=\frac{1}{\sqrt[]{\lambda^m_0}}\psi\left(\frac{t-nt_0\lambda^m_0}{\lambda^m_0}\right)$$
+
+
+$$\psi_{m,n}(t)=\frac{1}{\sqrt[]{\lambda^m_0}}\psi\left(\frac{t-nt_0\lambda^m_0}{\lambda^m_0}\right)$$
+
+
+$$=\lambda^\frac{-m}{2}_0\int{f(t)}\psi(\lambda^{-m}_{0}t-nt_0), $$
+$$\langle{f},\psi_{m,n}\rangle=\lambda^{\frac{-m}{2}}_0\int{f(t)}\psi(\lambda^{-m}_o{t}-nt_0)dt.$$
+
+\end{document}
+#this code was made by Tarantino97
