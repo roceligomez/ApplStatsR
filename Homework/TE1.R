@@ -1,4 +1,4 @@
-
+#E1
 #parte a
 set.seed(100)
 
