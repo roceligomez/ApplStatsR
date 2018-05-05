@@ -172,6 +172,134 @@ boxplot(mat[4,],col="lightgreen")
 boxplot(mat[7,],col="lightyellow")
 dev.off()
 
+# 2. ADVANCED GRAPHICS
+rm(list=ls())
+#EJERCICIO 1: FROM BASIC PLOTS TO COMPLEX GRAPHICS
+download.file("https://github.com/franciscorosales-marticorena/ApplStatsR/raw/master/Exercises/school_math.raw", destfile = "school_math.raw")
+d=read.table("school_math.raw",header=TRUE)
+
+#PARTE A.
+summary(d)
+head(d)
+
+#PARTE B.
+
+par(mfrow=c(2,2), col.lab="red", pch=15, lty="dashed")  
+
+plot(d$mathach ~ d$ses, xlab="Achivement", ylab="Socio-economic status")
+abline(lm(d$mathach ~ d$ses),d) #relacion lineal
+
+hist(d$mathach, main="Achivement",xlab="Achivement")
+
+hist(d$ses,main="Socio-economic status", xlab="Socio-economic status", probability = TRUE) #scaled
+lines(density(d$ses))
+
+boxplot(d$mathach ~ d$school)
+
+#PARTE C.
+dev.off()  #?
+
+#EJERCICIO 2: THE LAYOUT FUNCTION
+m=matrix(c(1, 3, 2, 4), byrow = TRUE,nrow=2,ncol=2)
+layout(m)
+plot(d$mathach ~ d$ses, xlab="Achivement", ylab="Socio-economic status")
+boxplot(d$mathach ~ d$ses)
+boxplot(d$mat)
+boxplot(d$ses)
+
+layout.show()
+
+# 3. DATA MANAGEMENT 
+
+#EJERCICIO 1: SPREADSHEET-LIKE DATA   
+rm(list=ls())
+
+#PARTE A.
+getwd()
+download.file("https://github.com/franciscorosales-marticorena/ApplStatsR/raw/master/Exercises/knee.txt",destfile="knee.txt")
+read.table("knee.txt")
+#?
+
+#PARTE B.
+read.table("knee.txt",colClasses = c("factor",NA ,"factor","factor"))
+
+#PARTE C.
+read.table("knee.txt",colClasses = c("factor",NA ,"factor","factor"),col.names = c("treatment","age","sex","agony"))
+
+#PARTE D.
+download.file("https://github.com/franciscorosales-marticorena/ApplStatsR/raw/master/Exercises/knee2.txt",destfile="knee2.txt")
+knee2=data.frame(read.table("knee2.txt"))
+#nop, esta escrita la palabra nomas
+
+#PARTE E. 
+download.file("https://github.com/franciscorosales-marticorena/ApplStatsR/raw/master/Exercises/knee3.txt",destfile="knee3.txt")
+read.table("knee3.txt", sep=";")
+#aqui si; y como estaban separados por ";" cambio el default que son espacios para read.table
+
+#PARTE F.
+new=rep(T,length(knee2$age))
+for(i in 1:length(knee2$age)) {
+  new[i]=ifelse(knee2$age[i]>40,"OLD","YOUNG")
+}
+knee2=data.frame(knee2,new)
+
+save(knee2,file="knee2g.Rdata")
+save(knee2,file="knee2g.csv")  
+write.table(knee2, file = "knee2.raw", quote = FALSE, sep = ":")    
+write.table(knee2, file = "knee2.dat", col.names = FALSE, row.names = FALSE)
+
+#EJERCICIO 2: HANDLING DATE OBJECTS AND ORDERING DATA IN R
+download.file("https://github.com/franciscorosales-marticorena/ApplStatsR/raw/master/Exercises/movies.csv",destfile="movies.csv")
+movies=read.csv("movies.csv")
+
+#PARTE A. 
+class(movies$end)  #factor
+class(movies$release)  #factor
+
+movies$release=as.Date(movies$release,format="%d.%m.%Y") #date
+movies$end=as.Date(movies$end,format="%d.%m.%Y") #date
+
+#PARTE B.
+tot_dias=difftime(movies$end,movies$release, units=c("days"))
+tot_sem=round(difftime(movies$end,movies$release, units=c("weeks")),digits=0)
+movies=data.frame(movies,tot_dias,tot_sem)
+
+#PARTE C.
+year=format(movies$release,"%Y")
+movies=data.frame(movies,year)
+
+#PARTE D.
+ranking=movies[order(movies$tot_sem,decreasing = TRUE),]
+
+#EJERCICIO 3: CONVERTING OBJECTS AND *RData-OBJECTS 
+download.file("https://github.com/franciscorosales-marticorena/ApplStatsR/blob/master/Exercises/data.RData?raw=true",destfile="data.RData")
+load("data.RData")
+ls(knee)  
+ls(list1)
+
+new_knee=data.matrix(knee)
+new_vector=c(unlist(list1))  
+
+#EJERCICIO 4: FOREIGN DATA STRUCTURES
+rm(list=ls())
+
+#PARTE A.
+install.packages("foreign")
+library(foreign)
+require(foreign)
+download.file("https://github.com/franciscorosales-marticorena/ApplStatsR/blob/master/Exercises/blutdruck.sav?raw=true",destfile="blutdruck.sav")
+blud=read.spss("blutdruck.sav")
+
+#PARTE B.
+install.packages("sas7bdat")
+library(sas7bdat)
+require(sas7bdat)
+download.file("https://github.com/franciscorosales-marticorena/ApplStatsR/blob/master/Exercises/s05_01.sas7bdat?raw=true",destfile="sas.sas7bdat")
+read.sas7bdat("sas.sas7bdat")
+
+#PARTE C.
+read.dta("https://github.com/franciscorosales-marticorena/ApplStatsR/blob/master/Exercises/golf.dta?raw=true")
+
 # 4. FUNCTIONS, DEBUGGING & CONDITION HANDLING
 
 #EJERCICIO 1: SIMPLE FUNCTIONS AND RESTRICTIONS
@@ -188,7 +316,6 @@ my_factorial=function(n) {
   }
   return(output)
 }
-
 
 #PARTE C.
 my_factorial=function(n) {
@@ -265,94 +392,3 @@ n.root_cubic=function(x){
   return(output)
 }
 
-# 3. DATA MANAGEMENT 
-
-#EJERCICIO 1: SPREADSHEET-LIKE DATA   
-rm(list=ls())
-
-#PARTE A.
-getwd()
-download.file("https://github.com/franciscorosales-marticorena/ApplStatsR/raw/master/Exercises/knee.txt",destfile="knee.txt")
-read.table("knee.txt")
-#?
-
-#PARTE B.
-read.table("knee.txt",colClasses = c("factor",NA ,"factor","factor"))
-
-#PARTE C.
-read.table("knee.txt",colClasses = c("factor",NA ,"factor","factor"),col.names = c("treatment","age","sex","agony"))
-
-#PARTE D.
-download.file("https://github.com/franciscorosales-marticorena/ApplStatsR/raw/master/Exercises/knee2.txt",destfile="knee2.txt")
-knee2=data.frame(read.table("knee2.txt"))
-#nop, esta escrita la palabra nomas
-
-#PARTE E. 
-download.file("https://github.com/franciscorosales-marticorena/ApplStatsR/raw/master/Exercises/knee3.txt",destfile="knee3.txt")
-read.table("knee3.txt", sep=";")
-#aqui si; y como estaban separados por ";" cambio el default que son espacios para read.table
-
-#PARTE F.
-new=rep(T,length(knee2$age))
-for(i in 1:length(knee2$age)) {
-  new[i]=ifelse(knee2$age[i]>40,"OLD","YOUNG")
-}
-knee2=data.frame(knee2,new)
-
-save(knee2,file="knee2g.Rdata")
-save(knee2,file="knee2g.csv")  
-write.table(knee2, file = "knee2.raw", quote = FALSE, sep = ":")    
-write.table(knee2, file = "knee2.dat", col.names = FALSE, row.names = FALSE)
-#guarda defrente el write.table
-
-#EJERCICIO 2: HANDLING DATE OBJECTS AND ORDERING DATA IN R
-download.file("https://github.com/franciscorosales-marticorena/ApplStatsR/raw/master/Exercises/movies.csv",destfile="movies.csv")
-movies=read.csv("movies.csv")
-
-#PARTE A. 
-class(movies$end)  #factor
-class(movies$release)  #factor
-
-movies$release=as.Date(movies$release,format="%d.%m.%Y") #date
-movies$end=as.Date(movies$end,format="%d.%m.%Y") #date
-
-#PARTE B.
-tot_dias=difftime(movies$end,movies$release, units=c("days"))
-tot_sem=round(difftime(movies$end,movies$release, units=c("weeks")),digits=0)
-movies=data.frame(movies,tot_dias,tot_sem)
-
-#PARTE C.
-year=format(movies$release,"%Y")
-movies=data.frame(movies,year)
-
-#PARTE D.
-ranking=movies[order(movies$tot_sem,decreasing = TRUE),]
-
-#EJERCICIO 3: CONVERTING OBJECTS AND *RData-OBJECTS 
-download.file("https://github.com/franciscorosales-marticorena/ApplStatsR/blob/master/Exercises/data.RData?raw=true",destfile="data.RData")
-load("data.RData")
-ls(knee)  
-ls(list1)
-
-new_knee=data.matrix(knee)
-new_vector=c(unlist(list1))  
-
-#EJERCICIO 4: FOREIGN DATA STRUCTURES
-rm(list=ls())
-
-#PARTE A.
-install.packages("foreign")
-library(foreign)
-require(foreign)
-download.file("https://github.com/franciscorosales-marticorena/ApplStatsR/blob/master/Exercises/blutdruck.sav?raw=true",destfile="blutdruck.sav")
-blud=read.spss("blutdruck.sav")
-
-#PARTE B.
-install.packages("sas7bdat")
-library(sas7bdat)
-require(sas7bdat)
-download.file("https://github.com/franciscorosales-marticorena/ApplStatsR/blob/master/Exercises/s05_01.sas7bdat?raw=true",destfile="sas.sas7bdat")
-read.sas7bdat("sas.sas7bdat")
-
-#PARTE C.
-read.dta("https://github.com/franciscorosales-marticorena/ApplStatsR/blob/master/Exercises/golf.dta?raw=true")
