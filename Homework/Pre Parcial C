@@ -1,0 +1,36 @@
+#EJERCICIO NRO 1
+
+plaintext ="ftbopdifdvboepsptbwpmwjpefmdjofbnbmgjubopftubcbwjfoepmbufmfwjtjpotfoubepfombtbmbzbqspwfdipqbsbefdjsmfrvfibcjbdpmhbepfmmjcspefejftuffofmufoefefspefspqbsptbmpnjspdpnptjopivcjfsbfoufoejepobebrvjfspefdjsejkpbnbmgjuboprvfopmpifdpmhbepqpsrvfqsfwjbnfoufmpivcjfsbnpkbepdpombnbohvfsbojqpsrvftfnfibzbdbjepbmbhvbtjnqmfnfoufmpifdpmhbepqpsrvftjqbsbwfsdpnpsftjtufbmbjoufnqfsjfmptfncbuftefftubobuvsbmfabeftfsujdbmbjefbftefevdibnqefkbsvomjcspefhfpnfusjbdpmhbepbmbjoufnqfsjfqbsbwfstjbqsfoefdvbuspdptbtefmbwjebsfbm"
+plainfactor=as.factor(strsplit(plaintext,"")[[1]]) #lo que hace es separar la letras como factores 
+#factor es para dar etiquetas, dar catergorías (para ver las frecuencias)
+plot(table(plainfactor),col=1,lwd=4,ylab="Frequency of letters",xlab=letters)
+
+hiddenfactor=as.factor(NULL)
+levels(hiddenfactor)=letters
+#letters.shift
+letters.shift=c(letters[-1],letters[1])   #creo un nuevo vector con las letras sin a y a
+for(i in seq_along(plainfactor)){         #ej. que F sea E
+  j = which(letters.shift==plainfactor[i]) #wich da la ubicación de donde está
+  hiddenfactor[i]=letters[j]
+}
+hiddenfactor
+
+#PREGUNTA 2
+
+rwalk=function(n) {
+  move=sample(1:4,n-1,replace=TRUE) #creo una muesra aleatoria con nro de 1 a 4 y con opción de reemplazar los númros
+  x=c(0,cumsum(c(-1,1,0,0)[move]))  #cumsum; para saber si algun momento llegó a la recepción
+  y=c(0,cumsum(c(0,0,-1,1)[move]))
+  list(x=x,y=y)
+}
+n=10^5
+k=10^3
+spath=matrix(0,n,k)
+out=rep(FALSE,k)
+
+for(i in 1:k){
+  rw=rwalk(n)
+  out[i]=any(rw$x<0 & rw$y==0)  #creo la condición de que llegue a la recepción 
+}
+prob=sum(out)/k
+prob
